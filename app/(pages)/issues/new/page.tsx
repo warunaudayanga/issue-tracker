@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { BsInfoCircle } from "react-icons/bs";
-import { CreateIssueDto, createIssueSchema } from "@/app/schemas/issue-schemas";
+import { CreateIssueDto, createIssueSchema } from "@/app/schemas/issue.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import ErrorMessage from "@/app/components/ErrorMessage";
 import Spinner from "@/app/components/Spinner";
