@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { ApiError } from "@/app/interfaces";
-import { ZodFormattedError, ZodIssue } from "zod";
+import { ZodFormattedError } from "zod";
 import { Issue } from "@prisma/client";
 
 export type AllString<T> = {
