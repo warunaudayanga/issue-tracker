@@ -41,10 +41,11 @@ const IssueForm = ({ issue }: { issue?: Issue }): JSX.Element => {
             if (issue) {
                 await axios.patch(`/api/issues/${issue.id}`, data);
                 router.push(`/issues/${issue.id}`);
-                return;
+            } else {
+                await axios.post("/api/issues", data);
+                router.push("/issues");
             }
-            await axios.post("/api/issues", data);
-            router.push("/issues");
+            router.refresh();
         } catch (error) {
             setError("Unexpected error occurred");
         } finally {
