@@ -21,6 +21,22 @@ export const PATCH = async (
     }
 
     const updatedIssue = await prisma.issue.update({ where: { id }, data: dto });
-
     return NextResponse.json(updatedIssue);
+};
+
+export const DELETE = async (
+    _request: NextRequest,
+    {
+        params: { id },
+    }: {
+        params: { id: string };
+    },
+): Promise<ApiResponse<Issue>> => {
+    const issue = await prisma.issue.findUnique({ where: { id } });
+    if (!issue) {
+        return NextResponse.json({ error: "Issue not found" }, { status: 404 });
+    }
+
+    const deletedIssue = await prisma.issue.delete({ where: { id } });
+    return NextResponse.json(deletedIssue);
 };
