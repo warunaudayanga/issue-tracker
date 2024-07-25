@@ -9,7 +9,7 @@ export const POST = async (request: NextRequest): Promise<ApiResponse<Issue>> =>
 
     const validation = createIssueSchema.safeParse(dto);
     if (!validation.success) {
-        return NextResponse.json(validation.error.issues, { status: 400 });
+        return NextResponse.json(validation.error.format(), { status: 400 });
     }
 
     const issue = await prisma.issue.create({ data: dto });
