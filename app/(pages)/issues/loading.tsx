@@ -1,12 +1,9 @@
 import { JSX } from "react";
-import { Table } from "@radix-ui/themes";
-import prisma from "@/prisma/client";
-import IssueStatusBadge from "@/app/components/IssueStatusBadge";
+import { Skeleton, Table } from "@radix-ui/themes";
 import IssueActions from "@/app/components/issues/IssueActions";
 
-const IssuesPage = async (): Promise<JSX.Element> => {
-    const issues = await prisma.issue.findMany();
-
+const LoadingIssuesPage = (): JSX.Element => {
+    const issues = Array.from({ length: 5 }).map((_, i) => i);
     return (
         <>
             <IssueActions />
@@ -20,17 +17,19 @@ const IssuesPage = async (): Promise<JSX.Element> => {
                 </Table.Header>
                 <Table.Body>
                     {issues.map(issue => (
-                        <Table.Row key={issue.id}>
+                        <Table.Row key={issue}>
                             <Table.Cell>
-                                {issue.title}
+                                <Skeleton />
                                 <div className="block md:hidden">
-                                    <IssueStatusBadge status={issue.status} />
+                                    <Skeleton />
                                 </div>
                             </Table.Cell>
                             <Table.Cell className="hidden md:table-cell">
-                                <IssueStatusBadge status={issue.status} />
+                                <Skeleton />
                             </Table.Cell>
-                            <Table.Cell className="hidden md:table-cell">{issue.createdAt.toDateString()}</Table.Cell>
+                            <Table.Cell className="hidden md:table-cell">
+                                <Skeleton />
+                            </Table.Cell>
                         </Table.Row>
                     ))}
                 </Table.Body>
@@ -39,4 +38,4 @@ const IssuesPage = async (): Promise<JSX.Element> => {
     );
 };
 
-export default IssuesPage;
+export default LoadingIssuesPage;
