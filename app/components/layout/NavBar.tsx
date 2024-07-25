@@ -5,7 +5,7 @@ import Link from "next/link";
 import { FaBug } from "react-icons/fa";
 import { usePathname } from "next/navigation";
 import { useSession } from "next-auth/react";
-import { Container, Flex } from "@radix-ui/themes";
+import { Avatar, Container, DropdownMenu, Flex, Text } from "@radix-ui/themes";
 
 const NavBar = (): JSX.Element => {
     const currentPath = usePathname();
@@ -45,10 +45,29 @@ const NavBar = (): JSX.Element => {
                     </Flex>
                     <Flex gap="3" align="center">
                         {status === "authenticated" && (
-                            <div className="flex gap-3">
-                                <div className="text-primary font-bold">{session.user?.name}</div>
-                                <Link href="/api/auth/signout">Sign Out</Link>
-                            </div>
+                            // <div className="flex gap-3">
+                            //     <div className="text-primary font-bold">{session.user?.name}</div>
+                            //     <Link href="/api/auth/signout">Sign Out</Link>
+                            // </div>
+                            <DropdownMenu.Root>
+                                <DropdownMenu.Trigger>
+                                    <Avatar
+                                        src={session.user!.image!}
+                                        fallback="?"
+                                        sizes="2"
+                                        radius="full"
+                                        className="cursor-pointer"
+                                    ></Avatar>
+                                </DropdownMenu.Trigger>
+                                <DropdownMenu.Content>
+                                    <DropdownMenu.Label>
+                                        <Text size="2">{session.user!.email}</Text>
+                                    </DropdownMenu.Label>
+                                    <DropdownMenu.Item>
+                                        <Link href="/api/auth/signout">Sign Out</Link>
+                                    </DropdownMenu.Item>
+                                </DropdownMenu.Content>
+                            </DropdownMenu.Root>
                         )}
                         {status === "unauthenticated" && <Link href="/api/auth/signin">Sign In</Link>}
                     </Flex>
