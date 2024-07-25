@@ -23,9 +23,9 @@ const NavBar = (): JSX.Element => {
     ];
 
     return (
-        <nav className="border-b mb-5 px-5 py-3">
+        <nav className="border-b mb-5 px-5">
             <Container>
-                <Flex justify="between">
+                <Flex justify="between" height="64px">
                     <Flex gap="6" align="center">
                         <Link href="/public">
                             <FaBug />
@@ -45,10 +45,6 @@ const NavBar = (): JSX.Element => {
                     </Flex>
                     <Flex gap="3" align="center">
                         {status === "authenticated" && (
-                            // <div className="flex gap-3">
-                            //     <div className="text-primary font-bold">{session.user?.name}</div>
-                            //     <Link href="/api/auth/signout">Sign Out</Link>
-                            // </div>
                             <DropdownMenu.Root>
                                 <DropdownMenu.Trigger>
                                     <Avatar
@@ -57,6 +53,7 @@ const NavBar = (): JSX.Element => {
                                         sizes="2"
                                         radius="full"
                                         className="cursor-pointer"
+                                        referrerPolicy="no-referrer"
                                     ></Avatar>
                                 </DropdownMenu.Trigger>
                                 <DropdownMenu.Content>
