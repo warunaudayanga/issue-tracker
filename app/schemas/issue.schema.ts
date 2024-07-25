@@ -10,7 +10,7 @@ export const createIssueSchema = z.object({
         .string()
         .regex(/./, "Title is required")
         .min(5, "Description must be at least 5 characters")
-        .max(255, "Description must not exceed 255 characters"),
+        .max(2000, "Description must not exceed 2000 characters"),
 });
 
 export type CreateIssueDto = z.infer<typeof createIssueSchema>;
