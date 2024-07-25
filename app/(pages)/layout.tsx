@@ -4,7 +4,7 @@ import "./globals.css";
 import { JSX, ReactNode } from "react";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import NavBar from "@/app/components/NavBar";
+import { NavBar } from "@/app/components";
 import { Theme } from "@radix-ui/themes";
 
 const inter = Inter({

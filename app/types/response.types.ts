@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { ApiError } from "@/app/interfaces/response.interfaces";
+import { ApiError } from "@/app/interfaces";
 import { ZodFormattedError, ZodIssue } from "zod";
 import { Issue } from "@prisma/client";
 

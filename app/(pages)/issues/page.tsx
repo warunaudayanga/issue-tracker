@@ -1,9 +1,7 @@
 import { JSX } from "react";
 import { Table } from "@radix-ui/themes";
+import { IssueActions, IssueStatusBadge, RouteLink } from "@/app/components";
 import prisma from "@/prisma/client";
-import IssueStatusBadge from "@/app/components/IssueStatusBadge";
-import IssueActions from "@/app/components/issues/IssueActions";
-import RouteLink from "@/app/components/RouteLink";
 
 const IssuesPage = async (): Promise<JSX.Element> => {
     const issues = await prisma.issue.findMany();

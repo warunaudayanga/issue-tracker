@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Issue } from "@prisma/client";
-import { createIssueDto, createIssueSchema } from "@/app/schemas/issue.schema";
+import { createIssueDto, createIssueSchema } from "@/app/schemas";
 import { ApiResponse } from "@/app/types/response.types";
 import prisma from "@/prisma/client";
 
