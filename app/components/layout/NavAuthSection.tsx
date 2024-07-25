@@ -1,12 +1,14 @@
 import { JSX } from "react";
-import { Avatar, DropdownMenu, Text } from "@radix-ui/themes";
+import { Avatar, DropdownMenu, Skeleton, Text } from "@radix-ui/themes";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 
 const NavAuthSection = (): JSX.Element | null => {
     const { status, data: session } = useSession();
 
-    if (status === "loading") return null;
+    if (status === "loading") {
+        return <Skeleton width="50px" height="25px"></Skeleton>;
+    }
 
     if (status === "unauthenticated" || !session) {
         return (
