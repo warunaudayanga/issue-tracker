@@ -1,6 +1,6 @@
 import { JSX } from "react";
 import { Skeleton, Table } from "@radix-ui/themes";
-import { IssueActions } from "@/app/components/issue";
+import { IssueActions } from "@/app/components";
 
 const LoadingIssuesPage = (): JSX.Element => {
     const issues = Array.from({ length: 5 }).map((_, i) => i);

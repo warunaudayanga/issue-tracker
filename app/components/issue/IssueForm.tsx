@@ -10,12 +10,11 @@ import { CreateIssueDto, issueSchema } from "@/app/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ErrorMessage, Spinner } from "@/app/components";
 import ReactMarkdown from "react-markdown";
-import dynamic from "next/dynamic";
 import "easymde/dist/easymde.min.css";
 import EasyMDE from "easymde";
 import { Issue } from "@prisma/client";
+import SimpleMdeReact from "react-simplemde-editor";
 
-const SimpleMDE = dynamic(() => import("react-simplemde-editor"), { ssr: false });
 const options: EasyMDE.Options = {
     status: false,
     maxHeight: "400px",
@@ -84,7 +83,7 @@ const IssueForm = ({ issue }: { issue?: Issue }): JSX.Element => {
                             control={control}
                             defaultValue={issue?.description}
                             render={({ field }) => (
-                                <SimpleMDE
+                                <SimpleMdeReact
                                     placeholder="Description"
                                     onBlur={field.onBlur}
                                     onChange={value => {

@@ -1,5 +1,11 @@
 import { JSX } from "react";
-import IssueForm from "@/app/components/issue/IssueForm";
+import dynamic from "next/dynamic";
+import { IssueFormSkeleton } from "@/app/components";
+
+const IssueForm = dynamic(() => import("@/app/components/issue/IssueForm"), {
+    ssr: false,
+    loading: () => <IssueFormSkeleton />,
+});
 
 const NewIssuePage = (): JSX.Element => {
     return <IssueForm />;
