@@ -49,7 +49,11 @@ const NavBar = (): JSX.Element => {
                                 <DropdownMenu.Trigger>
                                     <Avatar
                                         src={session.user!.image!}
-                                        fallback="?"
+                                        fallback={
+                                            <Text size="4" weight="bold">
+                                                {session.user!.name?.[0] || session.user!.email?.[0] || "?"}
+                                            </Text>
+                                        }
                                         sizes="2"
                                         radius="full"
                                         className="cursor-pointer"
