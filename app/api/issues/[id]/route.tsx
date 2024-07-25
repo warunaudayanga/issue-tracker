@@ -15,7 +15,7 @@ export const PATCH = async (
         return NextResponse.json(validation.error.format(), { status: 400 });
     }
 
-    const issue = await prisma.issue.update({ where: { id }, data: dto });
+    const issue = await prisma.issue.findUnique({ where: { id } });
     if (!issue) {
         return NextResponse.json({ error: "Issue not found" }, { status: 404 });
     }
