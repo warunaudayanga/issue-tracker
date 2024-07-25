@@ -15,13 +15,24 @@ const NewIssuePage = (): JSX.Element => {
     const [error, setError] = useState<string>("");
     const [isSubmitting, setSubmitting] = useState(false);
     const router = useRouter();
-
     const {
         register,
         handleSubmit,
         formState: { errors },
     } = useForm<CreateIssueDto>({
         resolver: zodResolver(createIssueSchema),
+    });
+
+    const onSubmit = handleSubmit(async data => {
+        try {
+            setSubmitting(true);
+            await axios.post("/api/issues", data);
+            router.push("/issues");
+        } catch (error) {
+            setError("Unexpected error occurred");
+        } finally {
+            setSubmitting(false);
+        }
     });
 
     return (
@@ -34,20 +45,7 @@ const NewIssuePage = (): JSX.Element => {
                     <Callout.Text>{error}</Callout.Text>
                 </Callout.Root>
             )}
-            <form
-                onSubmit={handleSubmit(async data => {
-                    try {
-                        setSubmitting(true);
-                        await axios.post("/api/issues", data);
-                        router.push("/");
-                    } catch (error) {
-                        setError("Unexpected error occurred");
-                    } finally {
-                        setSubmitting(false);
-                    }
-                })}
-                className="space-y-3"
-            >
+            <form onSubmit={onSubmit} className="space-y-3">
                 <TextField.Root placeholder="Title" {...register("title")}></TextField.Root>
                 <ErrorMessage>{errors.title?.message}</ErrorMessage>
 
