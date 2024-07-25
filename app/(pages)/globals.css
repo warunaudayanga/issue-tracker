@@ -17,9 +17,9 @@ body {
 }
 
 @layer base {
-  .bg-primary {
-    @apply bg-green-400 text-white;
-  }
+  /*.bg-primary {*/
+  /*  @apply bg-green-400 text-white;*/
+  /*}*/
 
   /*.app-input {*/
   /*  @apply border-2 border-green-400 rounded-md p-2 w-full !shadow-none ;*/
