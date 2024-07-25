@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Callout, Text, TextArea, TextField } from "@radix-ui/themes";
+import { Button, Callout, TextArea, TextField } from "@radix-ui/themes";
 import { JSX, useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import { BsInfoCircle } from "react-icons/bs";
 import { CreateIssueDto, createIssueSchema } from "@/app/schemas/issue-schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
+import ErrorMessage from "@/app/components/ErrorMessage";
 
 const NewIssuePage = (): JSX.Element => {
     const [error, setError] = useState<string>("");
@@ -43,17 +44,11 @@ const NewIssuePage = (): JSX.Element => {
                 className="space-y-3"
             >
                 <TextField.Root placeholder="Title" {...register("title")}></TextField.Root>
-                {errors.title && (
-                    <Text as="p" color="red">
-                        {errors.title.message}
-                    </Text>
-                )}
+                <ErrorMessage>{errors.title?.message}</ErrorMessage>
+
                 <TextArea rows={10} {...register("description")} />
-                {errors.description && (
-                    <Text as="p" color="red">
-                        {errors.description.message}
-                    </Text>
-                )}
+                <ErrorMessage>{errors.description?.message}</ErrorMessage>
+
                 <Button>Submit New Issue</Button>
             </form>
         </div>
