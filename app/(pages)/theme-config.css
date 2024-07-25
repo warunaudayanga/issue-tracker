@@ -1,0 +1,8 @@
+.radix-themes {
+    /*noinspection CssUnresolvedCustomProperty*/
+    --default-font-family: var(--font-inter);
+    --font-weight-light: 200;
+    --font-weight-regular: 300;
+    --font-weight-medium: 600;
+    --font-weight-bold: 800;
+}
