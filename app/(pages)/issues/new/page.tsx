@@ -9,9 +9,11 @@ import { BsInfoCircle } from "react-icons/bs";
 import { CreateIssueDto, createIssueSchema } from "@/app/schemas/issue-schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import ErrorMessage from "@/app/components/ErrorMessage";
+import Spinner from "@/app/components/Spinner";
 
 const NewIssuePage = (): JSX.Element => {
     const [error, setError] = useState<string>("");
+    const [isSubmitting, setSubmitting] = useState(false);
     const router = useRouter();
 
     const {
@@ -35,10 +37,13 @@ const NewIssuePage = (): JSX.Element => {
             <form
                 onSubmit={handleSubmit(async data => {
                     try {
+                        setSubmitting(true);
                         await axios.post("/api/issues", data);
                         router.push("/");
                     } catch (error) {
                         setError("Unexpected error occurred");
+                    } finally {
+                        setSubmitting(false);
                     }
                 })}
                 className="space-y-3"
@@ -49,7 +54,10 @@ const NewIssuePage = (): JSX.Element => {
                 <TextArea rows={10} {...register("description")} />
                 <ErrorMessage>{errors.description?.message}</ErrorMessage>
 
-                <Button>Submit New Issue</Button>
+                <Button disabled={isSubmitting}>
+                    Submit New Issue
+                    {isSubmitting && <Spinner />}
+                </Button>
             </form>
         </div>
     );
