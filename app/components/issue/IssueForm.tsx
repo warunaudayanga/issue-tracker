@@ -6,7 +6,7 @@ import { Controller, useForm } from "react-hook-form";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { BsInfoCircle } from "react-icons/bs";
-import { CreateIssueDto, createIssueSchema } from "@/app/schemas";
+import { CreateIssueDto, issueSchema } from "@/app/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ErrorMessage, Spinner } from "@/app/components";
 import ReactMarkdown from "react-markdown";
@@ -32,12 +32,17 @@ const IssueForm = ({ issue }: { issue?: Issue }): JSX.Element => {
         control,
         formState: { errors },
     } = useForm<CreateIssueDto>({
-        resolver: zodResolver(createIssueSchema),
+        resolver: zodResolver(issueSchema),
     });
 
     const onSubmit = handleSubmit(async data => {
         try {
             setSubmitting(true);
+            if (issue) {
+                await axios.patch(`/api/issues/${issue.id}`, data);
+                router.push(`/issues/${issue.id}`);
+                return;
+            }
             await axios.post("/api/issues", data);
             router.push("/issues");
         } catch (error) {
@@ -48,8 +53,14 @@ const IssueForm = ({ issue }: { issue?: Issue }): JSX.Element => {
     });
 
     return (
-        <>
-            <Grid columns={{ initial: "1", md: "2" }} gap="5">
+        <form onSubmit={onSubmit}>
+            <Grid
+                columns={{
+                    initial: "1",
+                    md: "2",
+                }}
+                gap="5"
+            >
                 <Box>
                     {error && (
                         <Callout.Root color="red" className="mb-5">
@@ -59,7 +70,7 @@ const IssueForm = ({ issue }: { issue?: Issue }): JSX.Element => {
                             <Callout.Text>{error}</Callout.Text>
                         </Callout.Root>
                     )}
-                    <form onSubmit={onSubmit} className="space-y-5">
+                    <Box className="space-y-5">
                         <TextField.Root
                             placeholder="Title"
                             {...register("title")}
@@ -84,7 +95,7 @@ const IssueForm = ({ issue }: { issue?: Issue }): JSX.Element => {
                                 />
                             )}
                         ></Controller>
-                    </form>
+                    </Box>
                 </Box>
                 <Box>
                     <Box className="prose !w-full max-w-full ps-5 h-[522px] overflow-y-auto border-2 rounded px-5 py-3">
@@ -94,12 +105,12 @@ const IssueForm = ({ issue }: { issue?: Issue }): JSX.Element => {
             </Grid>
             <Box className="mt-5">
                 <ErrorMessage>{errors.description?.message}</ErrorMessage>
-                <Button disabled={isSubmitting}>
-                    Submit New Issue
+                <Button disabled={isSubmitting} className="cursor-pointer">
+                    {issue ? "Update" : "Submit New"} Issue
                     {isSubmitting && <Spinner />}
                 </Button>
             </Box>
-        </>
+        </form>
     );
 };
 

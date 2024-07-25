@@ -7,4 +7,4 @@ export type AllString<T> = {
     [key in keyof T]?: string;
 };
 
-export type ApiResponse<T> = NextResponse<T | ApiError | ZodFormattedError<AllString<Issue>> | ZodIssue | ZodIssue[]>;
+export type ApiResponse<T> = NextResponse<T | ApiError | ZodFormattedError<AllString<Issue>>>;

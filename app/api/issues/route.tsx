@@ -1,13 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Issue } from "@prisma/client";
-import { createIssueDto, createIssueSchema } from "@/app/schemas";
+import { issueDto, issueSchema } from "@/app/schemas";
 import { ApiResponse } from "@/app/types/response.types";
 import prisma from "@/prisma/client";
 
 export const POST = async (request: NextRequest): Promise<ApiResponse<Issue>> => {
-    const dto = createIssueDto(await request.json());
+    const dto = issueDto(await request.json());
 
-    const validation = createIssueSchema.safeParse(dto);
+    const validation = issueSchema.safeParse(dto);
     if (!validation.success) {
         return NextResponse.json(validation.error.format(), { status: 400 });
     }
