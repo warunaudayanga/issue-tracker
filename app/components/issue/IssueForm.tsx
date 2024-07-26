@@ -1,10 +1,9 @@
 "use client";
 
-import { Box, Button, Callout, Grid, TextField } from "@radix-ui/themes";
+import { Box, Button, Grid, TextField } from "@radix-ui/themes";
 import { JSX, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
-import { BsInfoCircle } from "react-icons/bs";
 import { CreateIssueDto, createIssueSchema } from "@/app/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ErrorMessage, Spinner } from "@/app/components";
@@ -14,6 +13,7 @@ import EasyMDE from "easymde";
 import { Issue } from "@prisma/client";
 import SimpleMdeReact from "react-simplemde-editor";
 import { issueService } from "@/app/services";
+import { toast } from "react-hot-toast";
 
 const options: EasyMDE.Options = {
     status: false,
@@ -21,7 +21,6 @@ const options: EasyMDE.Options = {
 };
 
 const IssueForm = ({ issue }: { issue?: Issue }): JSX.Element => {
-    const [error, setError] = useState<string>("");
     const [isSubmitting, setSubmitting] = useState(false);
     const [description, setDescription] = useState("");
     const router = useRouter();
@@ -46,7 +45,7 @@ const IssueForm = ({ issue }: { issue?: Issue }): JSX.Element => {
             }
             router.refresh();
         } catch (error) {
-            setError("Unexpected error occurred");
+            toast.error("Unexpected error occurred");
         } finally {
             setSubmitting(false);
         }
@@ -62,14 +61,6 @@ const IssueForm = ({ issue }: { issue?: Issue }): JSX.Element => {
                 gap="5"
             >
                 <Box>
-                    {error && (
-                        <Callout.Root color="red" className="mb-5">
-                            <Callout.Icon>
-                                <BsInfoCircle />
-                            </Callout.Icon>
-                            <Callout.Text>{error}</Callout.Text>
-                        </Callout.Root>
-                    )}
                     <Box className="space-y-5">
                         <TextField.Root
                             placeholder="Title"

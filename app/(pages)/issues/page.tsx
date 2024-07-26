@@ -22,10 +22,10 @@ const IssuesPage = async ({ searchParams = {} }: Props): Promise<JSX.Element> =>
         { label: "Created", value: "createdAt", className: "hidden md:table-cell w-[140px] text-center" },
     ];
 
-    let { status, orderBy, dir } = searchParams;
+    let { status, orderBy = "createdAt", dir = "asc" } = searchParams;
     (status && Object.values(Status).includes(status)) || (status = undefined);
 
-    const issues = await prisma.issue.findMany({ where: { status } });
+    const issues = await prisma.issue.findMany({ where: { status }, orderBy: { [orderBy]: dir } });
 
     return (
         <>
