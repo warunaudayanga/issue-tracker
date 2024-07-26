@@ -31,6 +31,7 @@ export default function RootLayout({ children }: { children: ReactNode }): JSX.E
                         </main>
                     </Theme>
                 </AuthProvider>
+                <input type="hidden" data-info="to-make-webstorm-happy" className="nav-link-active" />
             </body>
         </html>
     );
