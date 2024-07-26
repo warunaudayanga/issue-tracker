@@ -44,7 +44,7 @@ const LoadingIssueDetailPage = (): JSX.Element => {
                         }}
                         flexShrink="1"
                     >
-                        <Skeleton height="30px"></Skeleton>
+                        <Skeleton height="32px"></Skeleton>
                     </Box>
                     <Flex
                         flexShrink="0"

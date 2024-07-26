@@ -1,20 +1,15 @@
 "use client";
 
-import { JSX, useEffect, useState } from "react";
-import { Select } from "@radix-ui/themes";
-import { User } from "next-auth";
-import axios from "axios";
+import { JSX } from "react";
+import { Select, Skeleton } from "@radix-ui/themes";
+import { useUsers } from "@/app/hooks";
 
-const AssigneeSelect = (): JSX.Element => {
-    const [users, setUsers] = useState<User[]>([]);
+const AssigneeSelect = (): JSX.Element | null => {
+    const { users, error, isLoading } = useUsers();
 
-    useEffect(() => {
-        const fetchUsers = async (): Promise<void> => {
-            const { data } = await axios.get<User[]>("/api/users");
-            setUsers(data);
-        };
-        void fetchUsers();
-    }, []);
+    if (isLoading) return <Skeleton height="32px"></Skeleton>;
+
+    if (error) return null;
 
     return (
         <Select.Root>
@@ -22,7 +17,7 @@ const AssigneeSelect = (): JSX.Element => {
             <Select.Content>
                 <Select.Group className="min-w-24">
                     <Select.Label>Suggestions</Select.Label>
-                    {users.map(user => (
+                    {users?.map(user => (
                         <Select.Item key={user.id} value={user.id}>
                             {user.name || user.email} {user.name && <small>({user.email})</small>}
                         </Select.Item>

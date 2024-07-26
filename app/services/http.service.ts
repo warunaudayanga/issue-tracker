@@ -22,6 +22,7 @@ export class HttpService<Entity> {
     }
 
     async getAll(): Promise<Entity[]> {
+        console.log("GETTING ALL");
         const res = await httpClient.get<Entity[]>(this.endpoint);
         return res.data;
     }
