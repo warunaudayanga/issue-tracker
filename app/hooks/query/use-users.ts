@@ -5,16 +5,16 @@ import { User } from "next-auth";
 import ms from "ms";
 
 const useUsers = (): Omit<UseQueryResult<User[]>, "data"> & {
-    genres: User[] | undefined;
+    users: User[] | undefined;
 } => {
     const { data, ...rest } = useQuery<User[]>({
         queryKey: CACHE_KEY_USERS,
         queryFn: () => userService.getAll(),
-        staleTime: ms("24h"),
+        staleTime: ms("1m"),
         initialData: [],
     });
-    return { genres: data, ...rest } as Omit<UseQueryResult<User[]>, "data"> & {
-        genres: User[] | undefined;
+    return { users: data, ...rest } as Omit<UseQueryResult<User[]>, "data"> & {
+        users: User[] | undefined;
     };
 };
 
