@@ -1,10 +1,10 @@
 "use client";
 
 import { JSX, useState } from "react";
-import { AlertDialog, Button, Flex } from "@radix-ui/themes";
+import { Button } from "@radix-ui/themes";
 import { BiTrash } from "react-icons/bi";
 import { useRouter } from "next/navigation";
-import { Spinner } from "@/app/components";
+import { AlertDialog, Spinner } from "@/app/components";
 import { issueService } from "@/app/services/issue.service";
 
 const DeleteIssueButton = ({ issueId, className }: { issueId: string; className?: string }): JSX.Element => {
@@ -26,44 +26,26 @@ const DeleteIssueButton = ({ issueId, className }: { issueId: string; className?
 
     return (
         <>
-            <AlertDialog.Root>
-                <AlertDialog.Trigger>
-                    <Button color="red" disabled={isDeleting} className={className}>
-                        <BiTrash />
-                        Delete Issue {isDeleting && <Spinner />}
-                    </Button>
-                </AlertDialog.Trigger>
-                <AlertDialog.Content>
-                    <AlertDialog.Title>Confirm Deletion</AlertDialog.Title>
-                    <AlertDialog.Description>
-                        Are you sure you want to delete this issue? This action cannot be undone.
-                    </AlertDialog.Description>
-                    <Flex mt="4" gap="3" justify="end">
-                        <AlertDialog.Cancel>
-                            <Button color="gray" variant="soft">
-                                Cancel
-                            </Button>
-                        </AlertDialog.Cancel>
-                        <AlertDialog.Action>
-                            <Button color="red" onClick={handleDeleteIssue}>
-                                Delete Issue
-                            </Button>
-                        </AlertDialog.Action>
-                    </Flex>
-                </AlertDialog.Content>
-            </AlertDialog.Root>
+            <AlertDialog
+                type="confirm"
+                title="Confirm Deletion"
+                message="Are you sure you want to delete this issue? This action cannot be undone."
+                actionButton="Delete Issue"
+                color="red"
+                onAction={handleDeleteIssue}
+            >
+                <Button color="red" disabled={isDeleting} className={className}>
+                    <BiTrash />
+                    Delete Issue {isDeleting && <Spinner />}
+                </Button>
+            </AlertDialog>
 
-            <AlertDialog.Root open={error}>
-                <AlertDialog.Content>
-                    <AlertDialog.Title>Something went wrong</AlertDialog.Title>
-                    <AlertDialog.Description>We were unable to delete the issue.</AlertDialog.Description>
-                    <Flex mt="2" justify="end">
-                        <Button color="gray" variant="soft" onClick={() => setError(false)}>
-                            Close
-                        </Button>
-                    </Flex>
-                </AlertDialog.Content>
-            </AlertDialog.Root>
+            <AlertDialog
+                title="Something went wrong"
+                message="We were unable to delete the issue."
+                open={error}
+                onClose={() => setError(false)}
+            />
         </>
     );
 };
