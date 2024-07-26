@@ -46,6 +46,7 @@
         "checksVoidReturn": false
       }
     ],
+    "@typescript-eslint/no-floating-promises": "error",
     "@typescript-eslint/no-non-null-assertion": "off",
     "@typescript-eslint/no-unused-vars": "off",
     "@typescript-eslint/prefer-nullish-coalescing": "off",
@@ -225,7 +226,12 @@
     "no-useless-rename": "error",
     "no-useless-return": "error",
     "no-var": "error",
-    "no-void": "error",
+    "no-void": [
+      "error",
+      {
+        "allowAsStatement": true
+      }
+    ],
     "no-warning-comments": "off",
     "no-whitespace-before-property": "error",
     "nonblock-statement-body-position": "error",

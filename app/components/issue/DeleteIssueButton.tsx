@@ -7,7 +7,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { Spinner } from "@/app/components";
 
-const DeleteIssueButton = ({ issueId }: { issueId: string }): JSX.Element => {
+const DeleteIssueButton = ({ issueId, className }: { issueId: string; className?: string }): JSX.Element => {
     const router = useRouter();
     const [error, setError] = useState(false);
     const [isDeleting, setDeleting] = useState(false);
@@ -28,7 +28,7 @@ const DeleteIssueButton = ({ issueId }: { issueId: string }): JSX.Element => {
         <>
             <AlertDialog.Root>
                 <AlertDialog.Trigger>
-                    <Button color="red" disabled={isDeleting}>
+                    <Button color="red" disabled={isDeleting} className={className}>
                         <BiTrash />
                         Delete Issue {isDeleting && <Spinner />}
                     </Button>

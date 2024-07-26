@@ -8,32 +8,31 @@ import AssigneeSelect from "@/app/components/issue/AssigneeSelect";
 
 const IssueDetails = ({ issue }: { issue: Issue }): JSX.Element => {
     return (
-        <>
+        <Box>
             <Heading>{issue.title}</Heading>
             <Flex gap="3" mt="2" align="center">
                 <IssueStatusBadge status={issue.status}></IssueStatusBadge>
                 <p>{issue.createdAt.toDateString()}</p>
             </Flex>
-            <Flex gap={{ initial: "4", sm: "6" }} mt="4" wrap={{ initial: "wrap-reverse", sm: "nowrap" }}>
+            <Flex gap={{ initial: "5", xs: "4", sm: "6" }} mt="4" wrap={{ initial: "wrap-reverse", sm: "nowrap" }}>
                 <Card className="prose max-w-full">
                     <ReactMarkdown>{issue.description}</ReactMarkdown>
                 </Card>
-                <Flex
-                    minWidth="150px"
-                    width={{ initial: "100%", sm: "auto" }}
-                    direction={{ initial: "row", sm: "column" }}
-                    gap="4"
-                >
-                    <Box flexGrow={{ initial: "1", sm: "0" }}>
-                        <AssigneeSelect></AssigneeSelect>
+                <Flex minWidth="200px" width={{ initial: "100%", sm: "250px" }} direction="column" gap="4">
+                    <Box flexGrow={{ initial: "1", sm: "0" }} flexShrink="1">
+                        <AssigneeSelect />
                     </Box>
-                    <Flex direction={{ initial: "row", sm: "column" }} gap="4">
+                    <Flex
+                        flexShrink="0"
+                        direction={{ initial: "column", xs: "row", sm: "column" }}
+                        gap={{ initial: "3", sm: "4" }}
+                    >
                         <EditIssueButton issueId={issue.id} />
                         <DeleteIssueButton issueId={issue.id} />
                     </Flex>
                 </Flex>
             </Flex>
-        </>
+        </Box>
     );
 };
 
