@@ -4,8 +4,9 @@ import { JSX, useState } from "react";
 import { Select } from "@radix-ui/themes";
 import { Status } from "@prisma/client";
 import { useRouter } from "next/navigation";
+import { LabelValuePair } from "@/app/types";
 
-const statuses: { label: string; value: Status | "all" }[] = [
+const statuses: LabelValuePair<Status | "all">[] = [
     { label: "All", value: "all" },
     { label: "Open", value: Status.OPEN },
     { label: "In Progress", value: Status.IN_PROGRESS },
