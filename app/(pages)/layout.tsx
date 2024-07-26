@@ -9,6 +9,7 @@ import { Container, Theme } from "@radix-ui/themes";
 import AuthProvider from "@/app/(pages)/auth/Provider";
 import { QueryClientProvider } from "@/app/providers";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { Toaster } from "react-hot-toast";
 
 const inter = Inter({
     subsets: ["latin"],
@@ -33,6 +34,7 @@ export default function RootLayout({ children }: { children: ReactNode }): JSX.E
                                 <Container>{children}</Container>
                                 <ReactQueryDevtools />
                             </main>
+                            <Toaster />
                         </Theme>
                     </AuthProvider>
                 </QueryClientProvider>

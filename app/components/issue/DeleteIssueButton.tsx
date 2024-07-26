@@ -6,9 +6,9 @@ import { BiTrash } from "react-icons/bi";
 import { useRouter } from "next/navigation";
 import { AlertDialog, Spinner } from "@/app/components";
 import { issueService } from "@/app/services/issue.service";
-import { toast, Toaster } from "react-hot-toast";
+import { toast } from "react-hot-toast";
 
-const DeleteIssueButton = ({ issueId, className }: { issueId: string; className?: string }): JSX.Element => {
+const DeleteIssueButton = ({ issueId }: { issueId: string }): JSX.Element => {
     const router = useRouter();
     const [isDeleting, setDeleting] = useState(false);
     const handleDeleteIssue = async (): Promise<void> => {
@@ -34,13 +34,17 @@ const DeleteIssueButton = ({ issueId, className }: { issueId: string; className?
                 color="red"
                 onAction={handleDeleteIssue}
             >
-                <Button color="red" disabled={isDeleting} className={className}>
+                <Button color="red" disabled={isDeleting} className="!w-[125px]">
                     <BiTrash />
-                    Delete Issue {isDeleting && <Spinner />}
+                    {!isDeleting && "Delete Issue"}
+                    {isDeleting && (
+                        <>
+                            Deleting
+                            <Spinner />
+                        </>
+                    )}
                 </Button>
             </AlertDialog>
-
-            <Toaster></Toaster>
         </>
     );
 };

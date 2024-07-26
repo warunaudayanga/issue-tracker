@@ -6,7 +6,7 @@ import { useUsers } from "@/app/hooks";
 import { issueService } from "@/app/services/issue.service";
 import { Issue } from "@prisma/client";
 import { Spinner } from "@/app/components";
-import { toast, Toaster } from "react-hot-toast";
+import { toast } from "react-hot-toast";
 
 const AssigneeSelect = ({ issue }: { issue: Issue }): JSX.Element | null => {
     const { users, error, isLoading } = useUsers();
@@ -61,8 +61,6 @@ const AssigneeSelect = ({ issue }: { issue: Issue }): JSX.Element | null => {
                     </Select.Group>
                 </Select.Content>
             </Select.Root>
-
-            <Toaster />
         </>
     );
 };
