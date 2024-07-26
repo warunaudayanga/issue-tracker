@@ -1,7 +1,7 @@
 // noinspection JSUnusedGlobalSymbols
 
 import { createHttpService } from "./http.service";
-import { Endpoint } from "../enums";
+import { APIEndpoint } from "../enums";
 import { User } from "next-auth";
 
 // export class GenreService extends HttpService<ListFetchResponse<Genre>> {
@@ -12,4 +12,4 @@ import { User } from "next-auth";
 //
 // export const genreService = new GenreService();
 
-export const userService = createHttpService<User>(Endpoint.USERS);
+export const userService = createHttpService<User>(APIEndpoint.USERS);

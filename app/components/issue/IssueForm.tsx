@@ -3,7 +3,6 @@
 import { Box, Button, Callout, Grid, TextField } from "@radix-ui/themes";
 import { JSX, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import axios from "axios";
 import { useRouter } from "next/navigation";
 import { BsInfoCircle } from "react-icons/bs";
 import { CreateIssueDto, createIssueSchema } from "@/app/schemas";
@@ -14,6 +13,7 @@ import "easymde/dist/easymde.min.css";
 import EasyMDE from "easymde";
 import { Issue } from "@prisma/client";
 import SimpleMdeReact from "react-simplemde-editor";
+import { issueService } from "@/app/services/issue.service";
 
 const options: EasyMDE.Options = {
     status: false,
@@ -34,14 +34,14 @@ const IssueForm = ({ issue }: { issue?: Issue }): JSX.Element => {
         resolver: zodResolver(createIssueSchema),
     });
 
-    const onSubmit = handleSubmit(async data => {
+    const onSubmit = handleSubmit(async issueDto => {
         try {
             setSubmitting(true);
             if (issue) {
-                await axios.patch(`/api/issues/${issue.id}`, data);
+                await issueService.update(issue.id, issueDto);
                 router.push(`/issues/${issue.id}`);
             } else {
-                await axios.post("/api/issues", data);
+                await issueService.create(issueDto);
                 router.push("/issues");
             }
             router.refresh();

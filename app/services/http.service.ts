@@ -27,7 +27,7 @@ export class HttpService<Entity> {
         return res.data;
     }
 
-    async get(id: number): Promise<Entity> {
+    async get(id: string): Promise<Entity> {
         const res = await httpClient.get<Entity>(`${this.endpoint}/${id}`);
         return res.data;
     }
@@ -37,12 +37,12 @@ export class HttpService<Entity> {
         return res.data;
     }
 
-    async update<T>(id: number, dto: T): Promise<Entity> {
+    async update<T>(id: string, dto: T): Promise<Entity> {
         const res = await httpClient.patch<Entity>(`${this.endpoint}/${id}`, dto);
         return res.data;
     }
 
-    async delete(id: number): Promise<Entity> {
+    async delete(id: string): Promise<Entity> {
         const res = await httpClient.delete<Entity>(`${this.endpoint}/${id}`);
         return res.data;
     }

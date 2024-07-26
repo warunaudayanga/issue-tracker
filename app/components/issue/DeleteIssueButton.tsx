@@ -3,9 +3,9 @@
 import { JSX, useState } from "react";
 import { AlertDialog, Button, Flex } from "@radix-ui/themes";
 import { BiTrash } from "react-icons/bi";
-import axios from "axios";
 import { useRouter } from "next/navigation";
 import { Spinner } from "@/app/components";
+import { issueService } from "@/app/services/issue.service";
 
 const DeleteIssueButton = ({ issueId, className }: { issueId: string; className?: string }): JSX.Element => {
     const router = useRouter();
@@ -14,7 +14,7 @@ const DeleteIssueButton = ({ issueId, className }: { issueId: string; className?
     const handleDeleteIssue = async (): Promise<void> => {
         try {
             setDeleting(true);
-            await axios.delete(`/api/issues/${issueId}`);
+            await issueService.delete(issueId);
             router.push("/issues");
             router.refresh();
         } catch (error) {
