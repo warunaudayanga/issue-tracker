@@ -6,7 +6,7 @@ import { Controller, useForm } from "react-hook-form";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { BsInfoCircle } from "react-icons/bs";
-import { CreateIssueDto, issueSchema } from "@/app/schemas";
+import { CreateIssueDto, createIssueSchema } from "@/app/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ErrorMessage, Spinner } from "@/app/components";
 import ReactMarkdown from "react-markdown";
@@ -31,7 +31,7 @@ const IssueForm = ({ issue }: { issue?: Issue }): JSX.Element => {
         control,
         formState: { errors },
     } = useForm<CreateIssueDto>({
-        resolver: zodResolver(issueSchema),
+        resolver: zodResolver(createIssueSchema),
     });
 
     const onSubmit = handleSubmit(async data => {

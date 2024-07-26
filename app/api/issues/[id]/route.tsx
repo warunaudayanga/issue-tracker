@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { ApiResponse } from "@/app/types";
 import { Issue } from "@prisma/client";
-import { issueDto, issueSchema } from "@/app/schemas";
+import { updateIssueDto, updateIssueSchema } from "@/app/schemas";
 import prisma from "@/prisma/client";
 import { getServerSession } from "next-auth";
 
@@ -14,16 +14,25 @@ export const PATCH = async (
         return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const dto = issueDto(await request.json());
+    const dto = updateIssueDto(await request.json());
 
-    const validation = issueSchema.safeParse(dto);
+    const validation = updateIssueSchema.safeParse(dto);
     if (!validation.success) {
         return NextResponse.json(validation.error.format(), { status: 400 });
     }
 
     const issue = await prisma.issue.findUnique({ where: { id } });
     if (!issue) {
-        return NextResponse.json({ error: "Issue not found" }, { status: 404 });
+        return NextResponse.json({ error: "Invalid user id" }, { status: 400 });
+    }
+
+    if (dto.userId) {
+        console.log(dto.userId);
+        const user = await prisma.user.findUnique({ where: { id: dto.userId } });
+        console.log(user);
+        if (!user) {
+            return NextResponse.json({ error: "User not found" }, { status: 404 });
+        }
     }
 
     const updatedIssue = await prisma.issue.update({ where: { id }, data: dto });
