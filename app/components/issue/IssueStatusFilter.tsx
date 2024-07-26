@@ -3,7 +3,7 @@
 import { JSX, useState } from "react";
 import { Select } from "@radix-ui/themes";
 import { Status } from "@prisma/client";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { LabelValuePair } from "@/app/types";
 
 const statuses: LabelValuePair<Status | "all">[] = [
@@ -15,10 +15,13 @@ const statuses: LabelValuePair<Status | "all">[] = [
 
 const IssueStatusFilter = (): JSX.Element => {
     const router = useRouter();
+    const searchParams = useSearchParams();
     const [isOpened, setOpened] = useState(false);
 
     const handleFilter = (status: Status | "all"): void => {
-        const query = status === "all" ? "" : `?status=${status}`;
+        const params = new URLSearchParams(searchParams);
+        if (status !== "all") params.set("status", status);
+        const query = params.size ? `?${params}` : "";
         router.push(`/issues${query}`);
     };
 
