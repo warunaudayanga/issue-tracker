@@ -6,10 +6,10 @@ import { BiTrash } from "react-icons/bi";
 import { useRouter } from "next/navigation";
 import { AlertDialog, Spinner } from "@/app/components";
 import { issueService } from "@/app/services/issue.service";
+import { toast, Toaster } from "react-hot-toast";
 
 const DeleteIssueButton = ({ issueId, className }: { issueId: string; className?: string }): JSX.Element => {
     const router = useRouter();
-    const [error, setError] = useState(false);
     const [isDeleting, setDeleting] = useState(false);
     const handleDeleteIssue = async (): Promise<void> => {
         try {
@@ -18,7 +18,7 @@ const DeleteIssueButton = ({ issueId, className }: { issueId: string; className?
             router.push("/issues");
             router.refresh();
         } catch (error) {
-            setError(true);
+            toast.error("We were unable to delete the issue.");
         } finally {
             setDeleting(false);
         }
@@ -40,12 +40,7 @@ const DeleteIssueButton = ({ issueId, className }: { issueId: string; className?
                 </Button>
             </AlertDialog>
 
-            <AlertDialog
-                title="Something went wrong"
-                message="We were unable to delete the issue."
-                open={error}
-                onClose={() => setError(false)}
-            />
+            <Toaster></Toaster>
         </>
     );
 };
