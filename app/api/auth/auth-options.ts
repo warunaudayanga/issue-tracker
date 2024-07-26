@@ -34,12 +34,4 @@ export const authOptions: AuthOptions = {
     session: {
         strategy: "jwt",
     },
-    callbacks: {
-        redirect({ url, baseUrl }): string {
-            if (url === "/auth/signin") {
-                return baseUrl;
-            }
-            return url.startsWith(baseUrl) ? url : baseUrl;
-        },
-    },
 };

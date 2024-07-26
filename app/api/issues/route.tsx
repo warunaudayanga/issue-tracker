@@ -3,8 +3,14 @@ import { Issue } from "@prisma/client";
 import { issueDto, issueSchema } from "@/app/schemas";
 import { ApiResponse } from "@/app/types/response.types";
 import prisma from "@/prisma/client";
+import { getServerSession } from "next-auth";
 
 export const POST = async (request: NextRequest): Promise<ApiResponse<Issue>> => {
+    const session = await getServerSession();
+    if (!session) {
+        return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
     const dto = issueDto(await request.json());
 
     const validation = issueSchema.safeParse(dto);

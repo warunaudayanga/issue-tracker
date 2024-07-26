@@ -20,7 +20,7 @@ const DeleteIssueButton = ({ issueId }: { issueId: string }): JSX.Element => {
         } catch (error) {
             setError(true);
         } finally {
-            setDeleting(true);
+            setDeleting(false);
         }
     };
 
