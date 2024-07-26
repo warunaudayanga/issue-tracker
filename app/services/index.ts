@@ -1,3 +1,6 @@
+// noinspection JSUnusedGlobalSymbols
+
 export * from "./http-client";
-export * from "./http.service";
-export * from "./user.service";
+export { default as createHttpService } from "./http.service";
+export { default as userService } from "./user.service";
+export { default as issueService } from "./user.service";

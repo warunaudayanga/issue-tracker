@@ -3,7 +3,7 @@
 import { JSX, useState } from "react";
 import { Box, Flex, Select, Skeleton, Text } from "@radix-ui/themes";
 import { useUsers } from "@/app/hooks";
-import { issueService } from "@/app/services/issue.service";
+import { issueService } from "@/app/services";
 import { Issue } from "@prisma/client";
 import { Spinner } from "@/app/components";
 import { toast } from "react-hot-toast";

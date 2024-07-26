@@ -3,6 +3,7 @@
 import { JSX, useState } from "react";
 import { Select } from "@radix-ui/themes";
 import { Status } from "@prisma/client";
+import { useRouter } from "next/navigation";
 
 const statuses: { label: string; value: Status | "all" }[] = [
     { label: "All", value: "all" },
@@ -12,10 +13,16 @@ const statuses: { label: string; value: Status | "all" }[] = [
 ];
 
 const IssueStatusFilter = (): JSX.Element => {
+    const router = useRouter();
     const [isOpened, setOpened] = useState(false);
 
+    const handleFilter = (status: Status | "all"): void => {
+        const query = status === "all" ? {} : { status };
+        // router.push();
+    };
+
     return (
-        <Select.Root defaultValue="all" onOpenChange={opened => setOpened(opened)}>
+        <Select.Root defaultValue="all" onOpenChange={opened => setOpened(opened)} onValueChange={handleFilter}>
             <Select.Trigger className="!w-[150px]"></Select.Trigger>
             <Select.Content>
                 {statuses.map(({ label, value }) => (

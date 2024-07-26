@@ -13,7 +13,7 @@ import "easymde/dist/easymde.min.css";
 import EasyMDE from "easymde";
 import { Issue } from "@prisma/client";
 import SimpleMdeReact from "react-simplemde-editor";
-import { issueService } from "@/app/services/issue.service";
+import { issueService } from "@/app/services";
 
 const options: EasyMDE.Options = {
     status: false,

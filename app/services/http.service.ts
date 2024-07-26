@@ -49,4 +49,6 @@ export class HttpService<Entity> {
     }
 }
 
-export const createHttpService = <Entity>(endpoint: string): HttpService<Entity> => new HttpService<Entity>(endpoint);
+const createHttpService = <Entity>(endpoint: string): HttpService<Entity> => new HttpService<Entity>(endpoint);
+
+export default createHttpService;

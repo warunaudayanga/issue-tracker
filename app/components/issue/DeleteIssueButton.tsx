@@ -5,7 +5,7 @@ import { Button } from "@radix-ui/themes";
 import { BiTrash } from "react-icons/bi";
 import { useRouter } from "next/navigation";
 import { AlertDialog, Spinner } from "@/app/components";
-import { issueService } from "@/app/services/issue.service";
+import { issueService } from "@/app/services";
 import { toast } from "react-hot-toast";
 
 const DeleteIssueButton = ({ issueId }: { issueId: string }): JSX.Element => {
