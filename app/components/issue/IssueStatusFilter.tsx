@@ -21,12 +21,17 @@ const IssueStatusFilter = (): JSX.Element => {
     const handleFilter = (status: Status | "all"): void => {
         const params = new URLSearchParams(searchParams);
         if (status !== "all") params.set("status", status);
+        else params.delete("status");
         const query = params.size ? `?${params}` : "";
         router.push(`/issues${query}`);
     };
 
     return (
-        <Select.Root defaultValue="all" onOpenChange={opened => setOpened(opened)} onValueChange={handleFilter}>
+        <Select.Root
+            defaultValue={searchParams.get("status") || "all"}
+            onOpenChange={opened => setOpened(opened)}
+            onValueChange={handleFilter}
+        >
             <Select.Trigger className="!w-[150px]"></Select.Trigger>
             <Select.Content>
                 {statuses.map(({ label, value }) => (
