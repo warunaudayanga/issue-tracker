@@ -5,7 +5,7 @@ import prisma from "@/prisma/client";
 import { Issue, Status } from "@prisma/client";
 import { TableColumns } from "@/app/types";
 import Link from "next/link";
-import { FaSortAmountDownAlt, FaSortAmountUpAlt } from "react-icons/fa";
+import { FaSortAmountDown, FaSortAmountDownAlt } from "react-icons/fa";
 
 interface Props {
     searchParams?: {
@@ -48,7 +48,7 @@ const IssuesPage = async ({ searchParams = {} }: Props): Promise<JSX.Element> =>
                                         {column.label}
                                     </Link>
                                     {column.value === searchParams.orderBy &&
-                                        (dir === "asc" ? <FaSortAmountDownAlt /> : <FaSortAmountUpAlt />)}
+                                        (dir === "asc" ? <FaSortAmountDownAlt /> : <FaSortAmountDown />)}
                                 </Flex>
                             </Table.ColumnHeaderCell>
                         ))}
