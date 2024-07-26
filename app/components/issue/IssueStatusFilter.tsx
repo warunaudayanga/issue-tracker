@@ -17,8 +17,8 @@ const IssueStatusFilter = (): JSX.Element => {
     const [isOpened, setOpened] = useState(false);
 
     const handleFilter = (status: Status | "all"): void => {
-        const query = status === "all" ? {} : { status };
-        // router.push();
+        const query = status === "all" ? "" : `?status=${status}`;
+        router.push(`/issues${query}`);
     };
 
     return (

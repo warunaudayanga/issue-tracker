@@ -2,9 +2,17 @@ import { JSX } from "react";
 import { Table } from "@radix-ui/themes";
 import { IssueActions, IssueStatusBadge, RouteLink } from "@/app/components";
 import prisma from "@/prisma/client";
+import { Status } from "@prisma/client";
 
-const IssuesPage = async (): Promise<JSX.Element> => {
-    const issues = await prisma.issue.findMany();
+interface Props {
+    searchParams?: {
+        status?: Status;
+    };
+}
+
+const IssuesPage = async ({ searchParams: { status } = {} }: Props): Promise<JSX.Element> => {
+    (status && Object.values(Status).includes(status)) || (status = undefined);
+    const issues = await prisma.issue.findMany({ where: { status } });
 
     return (
         <>
@@ -13,8 +21,12 @@ const IssuesPage = async (): Promise<JSX.Element> => {
                 <Table.Header>
                     <Table.Row>
                         <Table.ColumnHeaderCell>Issue</Table.ColumnHeaderCell>
-                        <Table.ColumnHeaderCell className="hidden md:table-cell">Status</Table.ColumnHeaderCell>
-                        <Table.ColumnHeaderCell className="hidden md:table-cell">Created</Table.ColumnHeaderCell>
+                        <Table.ColumnHeaderCell className="hidden md:table-cell w-[140px] text-center">
+                            Status
+                        </Table.ColumnHeaderCell>
+                        <Table.ColumnHeaderCell className="hidden md:table-cell w-[140px] text-center">
+                            Created
+                        </Table.ColumnHeaderCell>
                     </Table.Row>
                 </Table.Header>
                 <Table.Body>
@@ -26,10 +38,12 @@ const IssuesPage = async (): Promise<JSX.Element> => {
                                     <IssueStatusBadge status={issue.status} />
                                 </div>
                             </Table.Cell>
-                            <Table.Cell className="hidden md:table-cell">
+                            <Table.Cell className="hidden md:table-cell w-[140px] text-center">
                                 <IssueStatusBadge status={issue.status} />
                             </Table.Cell>
-                            <Table.Cell className="hidden md:table-cell">{issue.createdAt.toDateString()}</Table.Cell>
+                            <Table.Cell className="hidden md:table-cell w-[140px] text-center">
+                                {issue.createdAt.toDateString()}
+                            </Table.Cell>
                         </Table.Row>
                     ))}
                 </Table.Body>

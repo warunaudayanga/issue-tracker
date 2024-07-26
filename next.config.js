@@ -1,5 +1,6 @@
 /** @type {import("next").NextConfig} */
 const nextConfig = {
+    reactStrictMode: true,
     /** @return {Promise<import("next/dist/build").Header[]>} */
     async headers() {
         return [
