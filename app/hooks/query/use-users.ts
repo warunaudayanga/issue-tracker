@@ -11,7 +11,6 @@ const useUsers = (): Omit<UseQueryResult<User[]>, "data"> & {
         queryKey: CACHE_KEY_USERS,
         queryFn: () => userService.getAll(),
         staleTime: ms("1m"),
-        initialData: [],
     });
     return { users: data, ...rest } as Omit<UseQueryResult<User[]>, "data"> & {
         users: User[] | undefined;

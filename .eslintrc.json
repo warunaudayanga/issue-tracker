@@ -144,7 +144,7 @@
     "no-bitwise": "error",
     "no-caller": "error",
     "no-confusing-arrow": "off",
-//    "no-console": "error",
+    "no-console": "error",
     "no-constructor-return": "error",
     "no-continue": "off",
     "no-div-regex": "error",

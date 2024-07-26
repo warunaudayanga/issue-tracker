@@ -3,6 +3,7 @@
 import httpClient from "./http-client";
 import { AxiosRequestConfig } from "axios";
 import { GetAllResponse } from "@/app/interfaces";
+import delay from "delay";
 
 export class HttpService<Entity> {
     constructor(protected endpoint: string) {}
@@ -22,7 +23,6 @@ export class HttpService<Entity> {
     }
 
     async getAll(): Promise<Entity[]> {
-        console.log("GETTING ALL");
         const res = await httpClient.get<Entity[]>(this.endpoint);
         return res.data;
     }
@@ -39,6 +39,7 @@ export class HttpService<Entity> {
 
     async update<T>(id: string, dto: T): Promise<Entity> {
         const res = await httpClient.patch<Entity>(`${this.endpoint}/${id}`, dto);
+        await delay(2000);
         return res.data;
     }
 

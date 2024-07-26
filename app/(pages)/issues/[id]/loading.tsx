@@ -15,52 +15,39 @@ const LoadingIssueDetailPage = (): JSX.Element => {
                 gap={{
                     initial: "5",
                     xs: "4",
-                    sm: "6",
+                    sm: "5",
                 }}
                 mt="4"
-                wrap={{
-                    initial: "wrap-reverse",
-                    sm: "nowrap",
-                }}
+                wrap={{ initial: "wrap-reverse", sm: "nowrap" }}
+                justify="end"
             >
                 <Card className="w-full !flex flex-col gap-4">
                     {lines.map(line => (
                         <Skeleton key={line} height="20px" className="w-full"></Skeleton>
                     ))}
                 </Card>
-                <Flex
-                    minWidth="200px"
-                    width={{
-                        initial: "100%",
-                        sm: "250px",
-                    }}
-                    direction="column"
-                    gap="4"
-                >
-                    <Box
-                        flexGrow={{
-                            initial: "1",
-                            sm: "0",
-                        }}
-                        flexShrink="1"
-                    >
+                <Flex minWidth={{ sm: "250px" }} width="250px" direction="column" gap="4">
+                    <Box>
                         <Skeleton height="32px"></Skeleton>
                     </Box>
-                    <Flex
-                        flexShrink="0"
-                        direction={{
-                            initial: "column",
-                            xs: "row",
-                            sm: "column",
-                        }}
-                        gap={{
-                            initial: "3",
-                            sm: "4",
-                        }}
-                    >
-                        <Skeleton height="30px" width={{ initial: "100%", xs: "75px", sm: "100%" }}></Skeleton>
-                        <Skeleton height="30px" width={{ initial: "100%", xs: "125px", sm: "100%" }}></Skeleton>
-                    </Flex>
+                    <div className="flex flex-wrap sm:flex-nowrap justify-end gap-4">
+                        <Skeleton
+                            height="30px"
+                            width={{
+                                initial: "110px",
+                                xs: "110px",
+                                sm: "100%",
+                            }}
+                        ></Skeleton>
+                        <Skeleton
+                            height="30px"
+                            width={{
+                                initial: "125px",
+                                xs: "125px",
+                                sm: "100%",
+                            }}
+                        ></Skeleton>
+                    </div>
                 </Flex>
             </Flex>
         </Box>

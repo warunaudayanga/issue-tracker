@@ -14,22 +14,23 @@ const IssueDetails = ({ issue }: { issue: Issue }): JSX.Element => {
                 <IssueStatusBadge status={issue.status}></IssueStatusBadge>
                 <p>{issue.createdAt.toDateString()}</p>
             </Flex>
-            <Flex gap={{ initial: "5", xs: "4", sm: "6" }} mt="4" wrap={{ initial: "wrap-reverse", sm: "nowrap" }}>
-                <Card className="prose max-w-full">
+            <Flex
+                gap={{ initial: "5", xs: "4", sm: "5" }}
+                mt="4"
+                wrap={{ initial: "wrap-reverse", sm: "nowrap" }}
+                justify="end"
+            >
+                <Card className="prose max-w-full w-full">
                     <ReactMarkdown>{issue.description}</ReactMarkdown>
                 </Card>
-                <Flex minWidth="200px" width={{ initial: "100%", sm: "250px" }} direction="column" gap="4">
-                    <Box flexGrow={{ initial: "1", sm: "0" }} flexShrink="1">
-                        <AssigneeSelect />
+                <Flex minWidth={{ sm: "250px" }} width="250px" direction="column" gap="4">
+                    <Box>
+                        <AssigneeSelect issue={issue} />
                     </Box>
-                    <Flex
-                        flexShrink="0"
-                        direction={{ initial: "column", xs: "row", sm: "column" }}
-                        gap={{ initial: "3", sm: "4" }}
-                    >
+                    <div className="flex flex-wrap justify-end gap-4">
                         <EditIssueButton issueId={issue.id} />
                         <DeleteIssueButton issueId={issue.id} />
-                    </Flex>
+                    </div>
                 </Flex>
             </Flex>
         </Box>
