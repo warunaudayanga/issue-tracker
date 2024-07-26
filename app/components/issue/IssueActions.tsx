@@ -1,14 +1,20 @@
 import { JSX } from "react";
-import { Button } from "@radix-ui/themes";
+import { Box, Button, Flex } from "@radix-ui/themes";
 import Link from "next/link";
+import IssueStatusFilter from "@/app/components/issue/IssueStatusFilter";
 
 const IssueActions = (): JSX.Element => {
     return (
-        <div className="flex justify-end mb-5">
-            <Button>
-                <Link href="/issues/new">New Issue</Link>
-            </Button>
-        </div>
+        <Flex justify="between" mb="5">
+            <Box>
+                <IssueStatusFilter />
+            </Box>
+            <Box>
+                <Button>
+                    <Link href="/issues/new">New Issue</Link>
+                </Button>
+            </Box>
+        </Flex>
     );
 };
 

@@ -40,7 +40,7 @@ const AssigneeSelect = ({ issue }: { issue: Issue }): JSX.Element | null => {
                 <Select.Trigger placeholder="Assign..." className="!w-full !relative">
                     <Flex align="center" gap="2">
                         <Text truncate mr="5">
-                            {getUserLabel()}
+                            {userId === "unassigned" ? "Assign user..." : getUserLabel()}
                         </Text>
                         {isAssigning && (
                             <Box mr="1" position="absolute" right="5">
@@ -52,7 +52,7 @@ const AssigneeSelect = ({ issue }: { issue: Issue }): JSX.Element | null => {
                 <Select.Content>
                     <Select.Group className="min-w-24">
                         <Select.Item value="unassigned">Unassigned</Select.Item>
-                        <Select.Label>Suggestions</Select.Label>
+                        <Select.Label>Select a user</Select.Label>
                         {users?.map(user => (
                             <Select.Item key={user.id} value={user.id}>
                                 {user.name || user.email} {user.name && <small>({user.email})</small>}
