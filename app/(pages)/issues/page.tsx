@@ -22,8 +22,11 @@ const IssuesPage = async ({ searchParams = {} }: Props): Promise<JSX.Element> =>
         { label: "Created", value: "createdAt", className: "hidden md:table-cell w-[140px] text-center" },
     ];
 
-    let { status, orderBy = "createdAt", dir = "asc" } = searchParams;
+    let { status, orderBy, dir } = searchParams;
+
     (status && Object.values(Status).includes(status)) || (status = undefined);
+    (orderBy && columns.map(column => column.value).includes(orderBy)) || (orderBy = "createdAt");
+    (dir && ["asc", "desc"].includes(dir)) || (dir = "desc");
 
     const issues = await prisma.issue.findMany({ where: { status }, orderBy: { [orderBy]: dir } });
 
