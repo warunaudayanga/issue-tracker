@@ -1,0 +1,7 @@
+.pagination-button {
+    @apply !min-w-[45px];
+}
+
+.sm-only {
+    @apply !hidden md:!inline-flex;
+}

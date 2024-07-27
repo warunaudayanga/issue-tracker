@@ -13,6 +13,7 @@ export interface TableColumn<T = any> {
     label: string;
     value: keyof T;
     type?: "text" | "link" | "date" | "component";
+    align?: "center" | "between" | "start" | "end";
     href?: string;
     component?: ReactNode;
     className?: string;

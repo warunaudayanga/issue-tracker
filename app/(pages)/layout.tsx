@@ -30,15 +30,19 @@ export default function RootLayout({ children }: { children: ReactNode }): JSX.E
                     <AuthProvider>
                         <Theme accentColor="violet" radius="small">
                             <NavBar />
-                            <main className="p-5">
-                                <Container>{children}</Container>
+                            <main>
+                                <Container className="content p-5">{children}</Container>
                                 <ReactQueryDevtools />
                             </main>
                             <Toaster />
                         </Theme>
                     </AuthProvider>
                 </QueryClientProvider>
-                <input type="hidden" data-info="to-make-webstorm-happy" className="nav-link-active" />
+                <input
+                    type="hidden"
+                    data-info="to-make-webstorm-happy"
+                    className="nav-link-active data-table-pagination data-table-pagination-row data-table-header"
+                />
             </body>
         </html>
     );

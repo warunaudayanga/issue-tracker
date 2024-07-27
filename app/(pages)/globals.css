@@ -3,6 +3,8 @@
 @tailwind utilities;
 
 :root {
+    --nav-bar-height: 65px;
+    --content-height: calc(100vh - var(--nav-bar-height));
     --foreground-rgb: 0, 0, 0;
 }
 
@@ -14,6 +16,18 @@
 
 body {
     color: rgb(var(--foreground-rgb));
+}
+
+.nav-bar {
+    height: var(--nav-bar-height);
+}
+
+.content {
+    height: var(--content-height);
+}
+
+.content > div {
+    height: 100%;
 }
 
 button {
@@ -37,13 +51,5 @@ button {
     /*noinspection CssUnusedSymbol*/
     .nav-link-active {
         @apply text-zinc-900;
-    }
-
-    .pagination-button {
-        @apply !min-w-[32px];
-    }
-
-    .pagination-button.sm-only {
-        @apply !hidden sm:!inline-flex;
     }
 }

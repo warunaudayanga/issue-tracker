@@ -1,9 +1,9 @@
 import React, { JSX } from "react";
-import { IssueActions } from "@/app/components";
+import { DataTable, IssueActions } from "@/app/components";
 import prisma from "@/prisma/client";
 import { Issue, Status } from "@prisma/client";
 import { TableColumns } from "@/app/types";
-import DataTable from "@/app/components/DataTable";
+import { Flex } from "@radix-ui/themes";
 
 interface Props {
     searchParams?: {
@@ -17,8 +17,8 @@ interface Props {
 const IssuesPage = async ({ searchParams = {} }: Props): Promise<JSX.Element> => {
     const columns: TableColumns<Issue> = [
         { label: "Issue", value: "title", type: "link", href: "" },
-        { label: "Status", value: "status", href: "", className: "hidden md:table-cell w-[140px] text-center" },
-        { label: "Created", value: "createdAt", className: "hidden md:table-cell w-[140px] text-center" },
+        { label: "Status", value: "status", href: "", className: "hidden md:table-cell w-[140px]", align: "center" },
+        { label: "Created", value: "createdAt", className: "hidden md:table-cell w-[140px]", align: "center" },
     ];
 
     let { page: currentPage, status, orderBy, dir } = searchParams;
@@ -28,7 +28,7 @@ const IssuesPage = async ({ searchParams = {} }: Props): Promise<JSX.Element> =>
     (dir && ["asc", "desc"].includes(dir)) || (dir = "desc");
 
     const page = Number(currentPage) || 1;
-    const pageSize = 4;
+    const pageSize = 20;
 
     const items = await prisma.issue.findMany({
         where: { status },
@@ -40,10 +40,10 @@ const IssuesPage = async ({ searchParams = {} }: Props): Promise<JSX.Element> =>
     const totalItems = await prisma.issue.count({ where: { status } });
 
     return (
-        <>
+        <Flex direction="column" height="100%">
             <IssueActions />
-            <DataTable {...{ items, columns, searchParams, pageSize, totalItems }} />
-        </>
+            <DataTable {...{ items, columns, searchParams, pageSize, totalItems }} className="grow" />
+        </Flex>
     );
 };
 

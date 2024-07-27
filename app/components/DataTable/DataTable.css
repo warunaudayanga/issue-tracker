@@ -1,0 +1,19 @@
+@tailwind utilities;
+
+:root {
+    --pagination-height: 45px;
+}
+
+.data-table-pagination {
+    height: var(--pagination-height);
+}
+
+@layer utilities {
+    .data-table-pagination-row {
+        @apply absolute bottom-0 w-full flex items-center bg-gray-50 border-t rounded-b;
+    }
+
+    .data-table-header {
+        @apply absolute top-0 w-full flex items-center bg-gray-50 border-t rounded-b;
+    }
+}

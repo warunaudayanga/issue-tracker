@@ -5,19 +5,21 @@ import { Button, Flex, Text } from "@radix-ui/themes";
 import {
     ChevronLeftIcon,
     ChevronRightIcon,
-    DotsHorizontalIcon,
+    DotFilledIcon,
     DoubleArrowLeftIcon,
     DoubleArrowRightIcon,
 } from "@radix-ui/react-icons";
 import { useRouter, useSearchParams } from "next/navigation";
+import "./pagination.css";
 
 interface Props {
     itemCount: number;
     pageSize: number;
     currentPage: number;
+    className?: string;
 }
 
-const Pagination = ({ itemCount, pageSize, currentPage }: Props): JSX.Element | null => {
+const Pagination = ({ itemCount, pageSize, currentPage, className }: Props): JSX.Element | null => {
     const router = useRouter();
     const searchParams = useSearchParams();
 
@@ -39,7 +41,7 @@ const Pagination = ({ itemCount, pageSize, currentPage }: Props): JSX.Element | 
     };
 
     return (
-        <Flex gap="5" align="center" justify="between">
+        <Flex gap="5" align="center" justify="between" className={className}>
             <Flex>
                 <Text>
                     Page {currentPage} of {pageCount}
@@ -64,7 +66,7 @@ const Pagination = ({ itemCount, pageSize, currentPage }: Props): JSX.Element | 
                 >
                     <ChevronLeftIcon />
                 </Button>
-                {currentPage > pageButtonCount - 1 && <DotsHorizontalIcon />}
+                <DotFilledIcon className="sm-only" />
                 {shownPages().map(i =>
                     currentPage === i + 1 ? (
                         <Button key={i} className="pagination-button sm-only">
@@ -82,7 +84,7 @@ const Pagination = ({ itemCount, pageSize, currentPage }: Props): JSX.Element | 
                         </Button>
                     ),
                 )}
-                {currentPage < pageCount - pageButtonCount + 2 && <DotsHorizontalIcon />}
+                <DotFilledIcon className="sm-only" />
                 <Button
                     className="pagination-button"
                     color="gray"
