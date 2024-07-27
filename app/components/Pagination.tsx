@@ -11,9 +11,11 @@ interface Props {
     currentPage: number;
 }
 
-const Pagination = ({ itemCount, pageSize, currentPage }: Props): JSX.Element => {
+const Pagination = ({ itemCount, pageSize, currentPage }: Props): JSX.Element | null => {
     const router = useRouter();
     const searchParams = useSearchParams();
+
+    if (itemCount <= pageSize) return null;
 
     const pageCount = Math.ceil(itemCount / pageSize);
 

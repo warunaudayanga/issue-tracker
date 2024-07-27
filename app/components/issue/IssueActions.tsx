@@ -5,7 +5,7 @@ import IssueStatusFilter from "@/app/components/issue/IssueStatusFilter";
 
 const IssueActions = (): JSX.Element => {
     return (
-        <Flex justify="between" mb="5">
+        <Flex justify="between" mb="3">
             <Box>
                 <IssueStatusFilter />
             </Box>

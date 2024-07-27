@@ -6,9 +6,11 @@ import { Issue, Status } from "@prisma/client";
 import { TableColumns } from "@/app/types";
 import Link from "next/link";
 import { FaSortAmountDown, FaSortAmountDownAlt } from "react-icons/fa";
+import Pagination from "@/app/components/Pagination";
 
 interface Props {
     searchParams?: {
+        page?: string;
         status?: Status;
         orderBy?: keyof Issue;
         dir?: "asc" | "desc";
@@ -22,18 +24,28 @@ const IssuesPage = async ({ searchParams = {} }: Props): Promise<JSX.Element> =>
         { label: "Created", value: "createdAt", className: "hidden md:table-cell w-[140px] text-center" },
     ];
 
-    let { status, orderBy, dir } = searchParams;
+    let { page: currentPage, status, orderBy, dir } = searchParams;
 
     (status && Object.values(Status).includes(status)) || (status = undefined);
     (orderBy && columns.map(column => column.value).includes(orderBy)) || (orderBy = "createdAt");
     (dir && ["asc", "desc"].includes(dir)) || (dir = "desc");
 
-    const issues = await prisma.issue.findMany({ where: { status }, orderBy: { [orderBy]: dir } });
+    const page = Number(currentPage) || 1;
+    const pageSize = 8;
+
+    const issues = await prisma.issue.findMany({
+        where: { status },
+        orderBy: { [orderBy]: dir },
+        skip: (page - 1) * pageSize,
+        take: pageSize,
+    });
+
+    const totalIssues = await prisma.issue.count({ where: { status } });
 
     return (
         <>
             <IssueActions />
-            <Table.Root variant="surface">
+            <Table.Root variant="surface" className="mb-3">
                 <Table.Header>
                     <Table.Row>
                         {columns.map(column => (
@@ -75,6 +87,13 @@ const IssuesPage = async ({ searchParams = {} }: Props): Promise<JSX.Element> =>
                         </Table.Row>
                     ))}
                 </Table.Body>
+                <Table.Header>
+                    <Table.Row>
+                        <Table.ColumnHeaderCell colSpan={columns.length} className="text-center">
+                            <Pagination itemCount={totalIssues} pageSize={pageSize} currentPage={page} />
+                        </Table.ColumnHeaderCell>
+                    </Table.Row>
+                </Table.Header>
             </Table.Root>
         </>
     );
