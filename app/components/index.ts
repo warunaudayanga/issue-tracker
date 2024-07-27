@@ -6,3 +6,4 @@ export { default as IssueStatusBadge } from "./IssueStatusBadge";
 export { default as Spinner } from "./Spinner";
 export { default as ErrorMessage } from "./ErrorMessage";
 export { default as AlertDialog } from "./AlertDialog";
+export { default as Pagination } from "./Pagination";

@@ -1,3 +1,5 @@
+# noinspection SpellCheckingInspectionForFile
+
 INSERT INTO Issue (id, title, description, status, createdAt, updatedAt)
 VALUES ('cjld2cjxh0000qzrmn831i7rn',
         'Fix homepage loading issue that occurs during peak hours under certain conditions',

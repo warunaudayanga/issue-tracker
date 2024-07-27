@@ -1,15 +1,21 @@
-export interface LabelBase {
-    label: string;
-}
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { ReactNode } from "react";
 
-export type LabelValuePair<T, K extends string = "value"> = LabelBase & {
+export type LabelBase = {
+    label: string;
+};
+
+export type LabelValuePair<T = any, K extends string = "value"> = LabelBase & {
     [key in K]: T;
 };
 
-export interface TableColumn<T> {
+export interface TableColumn<T = any> {
     label: string;
     value: keyof T;
+    type?: "text" | "link" | "date" | "component";
+    href?: string;
+    component?: ReactNode;
     className?: string;
 }
 
-export type TableColumns<T> = TableColumn<T>[];
+export type TableColumns<T = any> = TableColumn<T>[];
