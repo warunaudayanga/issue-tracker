@@ -26,7 +26,7 @@ const LoadingIssueDetailPage = (): JSX.Element => {
                         <Skeleton key={line} height="20px" className="w-full"></Skeleton>
                     ))}
                 </Card>
-                <Flex minWidth={{ sm: "250px" }} width="250px" direction="column" gap="4">
+                <Flex minWidth={{ sm: "255px" }} width="250px" direction="column" gap="4">
                     <Box>
                         <Skeleton height="32px"></Skeleton>
                     </Box>
@@ -35,15 +35,13 @@ const LoadingIssueDetailPage = (): JSX.Element => {
                             height="30px"
                             width={{
                                 initial: "110px",
-                                xs: "110px",
                                 sm: "100%",
                             }}
                         ></Skeleton>
                         <Skeleton
                             height="30px"
                             width={{
-                                initial: "125px",
-                                xs: "125px",
+                                initial: "130px",
                                 sm: "100%",
                             }}
                         ></Skeleton>
