@@ -10,7 +10,7 @@ import {
     DoubleArrowRightIcon,
 } from "@radix-ui/react-icons";
 import { useRouter, useSearchParams } from "next/navigation";
-import "@/app/components/Pagination/pagination.css";
+import "./Pagination.css";
 
 interface Props {
     itemCount: number;
