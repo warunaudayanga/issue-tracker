@@ -4,6 +4,7 @@ import prisma from "@/prisma/client";
 import { Issue, Status } from "@prisma/client";
 import { TableColumns } from "@/app/types";
 import { Flex } from "@radix-ui/themes";
+import { Metadata } from "next";
 
 interface Props {
     searchParams?: {
@@ -48,5 +49,10 @@ const IssuesPage = async ({ searchParams = {} }: Props): Promise<JSX.Element> =>
 };
 
 export const dynamic = "force-dynamic";
+
+export const metadata: Metadata = {
+    title: "Issue Tracker - Issue List",
+    description: "View all issues and their statuses.",
+};
 
 export default IssuesPage;
