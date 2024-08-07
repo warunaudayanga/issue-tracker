@@ -8,11 +8,11 @@ import { NavAuthSection, NavLinks } from "@/app/components";
 
 const NavBar = (): JSX.Element => {
     return (
-        <nav className="border-b nav-bar">
+        <nav className="border-b nav-bar px-5">
             <Container>
                 <Flex justify="between" height="64px">
                     <Flex gap="6" align="center">
-                        <Link href="/public">
+                        <Link href="/">
                             <FaBug />
                         </Link>
                         <NavLinks />

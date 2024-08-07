@@ -1,6 +1,6 @@
 import { JSX } from "react";
-import Pagination from "@/app/components/Pagination/Pagination";
+import LatestIssues from "@/app/components/LatestIssues";
 
-export default function Home({ searchParams: { page = "1" } = {} }: { searchParams?: { page?: string } }): JSX.Element {
-    return <Pagination itemCount={10} pageSize={5} currentPage={parseInt(page)} />;
+export default function Home(): JSX.Element {
+    return <LatestIssues />;
 }
