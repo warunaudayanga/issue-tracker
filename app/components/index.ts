@@ -8,3 +8,5 @@ export { default as IssueStatusBadge } from "./IssueStatusBadge";
 export { default as Spinner } from "./Spinner";
 export { default as ErrorMessage } from "./ErrorMessage";
 export { default as AlertDialog } from "./AlertDialog";
+export { default as LatestIssues } from "./LatestIssues";
+export { default as IssueSummary } from "./IssueSummary";

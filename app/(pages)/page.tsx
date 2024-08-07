@@ -1,6 +1,10 @@
 import { JSX } from "react";
-import LatestIssues from "@/app/components/LatestIssues";
+import { IssueSummary, LatestIssues } from "@/app/components";
+import prisma from "@/prisma/client";
 
-export default function Home(): JSX.Element {
-    return <LatestIssues />;
+export default async function Home(): Promise<JSX.Element> {
+    const open = await prisma.issue.count({ where: { status: "OPEN" } });
+    const inProgress = await prisma.issue.count({ where: { status: "IN_PROGRESS" } });
+    const closed = await prisma.issue.count({ where: { status: "CLOSED" } });
+    return <IssueSummary open={open} inProgress={inProgress} closed={closed} />;
 }
