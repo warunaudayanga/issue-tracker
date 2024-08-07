@@ -23,11 +23,11 @@ const IssueDetails = ({ issue }: { issue: Issue }): JSX.Element => {
                 <Card className="prose max-w-full w-full">
                     <ReactMarkdown>{issue.description}</ReactMarkdown>
                 </Card>
-                <Flex minWidth={{ sm: "255px" }} width="255px" direction="column" gap="4">
+                <Flex minWidth={{ sm: "260px" }} width="260px" direction="column" gap="4">
                     <Box>
                         <AssigneeSelect issue={issue} />
                     </Box>
-                    <div className="flex flex-wrap justify-end gap-4">
+                    <div className="flex flex-wrap justify-end md:justify-between gap-4">
                         <EditIssueButton issueId={issue.id} />
                         <DeleteIssueButton issueId={issue.id} />
                     </div>

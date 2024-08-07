@@ -26,7 +26,7 @@ const LoadingIssueDetailPage = (): JSX.Element => {
                         <Skeleton key={line} height="20px" className="w-full"></Skeleton>
                     ))}
                 </Card>
-                <Flex minWidth={{ sm: "255px" }} width="250px" direction="column" gap="4">
+                <Flex minWidth={{ sm: "260px" }} width="250px" direction="column" gap="4">
                     <Box>
                         <Skeleton height="32px"></Skeleton>
                     </Box>
