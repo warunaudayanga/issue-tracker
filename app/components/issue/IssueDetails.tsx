@@ -23,7 +23,7 @@ const IssueDetails = ({ issue }: { issue: Issue }): JSX.Element => {
                 <Card className="prose max-w-full w-full">
                     <ReactMarkdown>{issue.description}</ReactMarkdown>
                 </Card>
-                <Flex minWidth={{ sm: "250px" }} width="250px" direction="column" gap="4">
+                <Flex minWidth={{ sm: "255px" }} width="255px" direction="column" gap="4">
                     <Box>
                         <AssigneeSelect issue={issue} />
                     </Box>

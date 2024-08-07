@@ -34,7 +34,7 @@ const DeleteIssueButton = ({ issueId }: { issueId: string }): JSX.Element => {
                 color="red"
                 onAction={handleDeleteIssue}
             >
-                <Button color="red" disabled={isDeleting} className="!w-[125px]">
+                <Button color="red" disabled={isDeleting} className="!w-[130px]">
                     <BiTrash />
                     {!isDeleting && "Delete Issue"}
                     {isDeleting && (
