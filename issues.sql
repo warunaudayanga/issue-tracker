@@ -1,6 +1,6 @@
 # noinspection SpellCheckingInspectionForFile
 
-INSERT INTO Issue (id, title, description, status, createdAt, updatedAt)
+INSERT INTO issues (id, title, description, status, createdAt, updatedAt)
 VALUES ('cjld2cjxh0000qzrmn831i7rn',
         'Fix homepage loading issue that occurs during peak hours under certain conditions',
         'The homepage is experiencing performance issues, particularly during peak traffic hours. Users have reported that the page load time exceeds acceptable limits, which affects their experience negatively. This issue seems to be related to large image sizes and potentially unoptimized JavaScript files.
