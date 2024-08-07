@@ -8,7 +8,7 @@ import { IssueStatusBadge, Pagination, RouteLink } from "@/app/components";
 import { TableColumns } from "@/app/types";
 import { Issue } from "@prisma/client";
 import { PaginationParams } from "@/app/interfaces";
-import "./DataTable.css";
+import "@/app/components/DataTable/DataTable.css";
 import classNames from "classnames";
 
 interface Props {
