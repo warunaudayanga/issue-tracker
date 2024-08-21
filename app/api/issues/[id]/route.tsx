@@ -37,6 +37,8 @@ export const PATCH = async (
         const updatedIssue = await prisma.issue.update({ where: { id }, data: dto });
         return NextResponse.json(updatedIssue);
     } catch (error) {
+        // TODO: remove eslint-disable
+        // eslint-disable-next-line no-console
         console.log(error);
         throw error;
     }

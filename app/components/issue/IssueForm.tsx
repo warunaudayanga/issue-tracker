@@ -45,6 +45,8 @@ const IssueForm = ({ issue }: { issue?: Issue }): JSX.Element => {
             }
             router.refresh();
         } catch (error) {
+            // TODO: remove eslint-disable
+            // eslint-disable-next-line no-console
             console.log(error);
             toast.error("Unexpected error occurred");
         } finally {
