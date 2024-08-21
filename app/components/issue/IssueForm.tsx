@@ -14,6 +14,7 @@ import { Issue } from "@prisma/client";
 import SimpleMdeReact from "react-simplemde-editor";
 import { issueService } from "@/app/services";
 import { toast } from "react-hot-toast";
+import * as Sentry from "@sentry/nextjs";
 
 const options: EasyMDE.Options = {
     status: false,
@@ -45,10 +46,8 @@ const IssueForm = ({ issue }: { issue?: Issue }): JSX.Element => {
             }
             router.refresh();
         } catch (error) {
-            // TODO: remove eslint-disable
-            // eslint-disable-next-line no-console
-            console.log(error);
-            toast.error("Unexpected error occurred");
+            // TODO: remove this
+            Sentry.captureException(error);
         } finally {
             setSubmitting(false);
         }

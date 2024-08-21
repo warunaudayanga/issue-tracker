@@ -4,6 +4,7 @@ import { Issue } from "@prisma/client";
 import { updateIssueDto, updateIssueSchema } from "@/app/schemas";
 import prisma from "@/prisma/client";
 import { getServerSession } from "next-auth";
+import * as Sentry from "@sentry/nextjs";
 
 export const PATCH = async (
     request: NextRequest,
@@ -37,9 +38,8 @@ export const PATCH = async (
         const updatedIssue = await prisma.issue.update({ where: { id }, data: dto });
         return NextResponse.json(updatedIssue);
     } catch (error) {
-        // TODO: remove eslint-disable
-        // eslint-disable-next-line no-console
-        console.log(error);
+        // TODO: remove this
+        Sentry.captureException(error);
         throw error;
     }
 };
