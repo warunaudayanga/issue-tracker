@@ -45,6 +45,7 @@ const IssueForm = ({ issue }: { issue?: Issue }): JSX.Element => {
             }
             router.refresh();
         } catch (error) {
+            console.log(error);
             toast.error("Unexpected error occurred");
         } finally {
             setSubmitting(false);
